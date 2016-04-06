@@ -21,10 +21,7 @@ android {
         targetSdkVersion 23
     }
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_6
-    }
-    jacoco {
-        version = '0.7.3.201502191951'
+        targetCompatibility JavaVersion.VERSION_1_7
     }
 }
 

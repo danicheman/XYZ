@@ -209,6 +209,9 @@ public class ArticleDetailFragment extends Fragment implements
                                 mRootView.findViewById(R.id.meta_bar)
                                         .setBackgroundColor(mMutedColor);
                                 updateStatusBar();
+                                Log.e(TAG, "onResponse: bitmap is SET!!!"+ imageContainer.getRequestUrl());
+                            } else {
+                                Log.d(TAG, "onResponse: bitmap is null");
                             }
                         }
 

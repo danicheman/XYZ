@@ -17,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +38,8 @@ import com.example.xyzreader.data.UpdaterService;
 public class ArticleListActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
+    private static final String TAG = "ArticleListActivity";
+    
     private Toolbar mToolbar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -136,15 +139,24 @@ public class ArticleListActivity extends AppCompatActivity implements
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Bundle options;
+
                     Intent intent = new Intent(Intent.ACTION_VIEW,
                             ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition())));
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && view != null) {
-                        options = ActivityOptionsCompat.makeSceneTransitionAnimation(ArticleListActivity.this,view,getString(R.string.transition_photo)).toBundle();
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        Log.i(TAG, "onClick: Using SharedTransition");
+                        DynamicHeightNetworkImageView imageView =
+                                (DynamicHeightNetworkImageView) view.findViewById(R.id.thumbnail);
+                        Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                ArticleListActivity.this,
+                                imageView,
+                                imageView.getTransitionName())
+                                .toBundle();
+                        startActivity(intent, bundle);
                     } else {
-                        options = null;
+                        Log.i(TAG, "onClick: Not using shared transition");
+                        startActivity(intent);
                     }
-                    startActivity(intent, options);
+
                 }
             });
             return vh;

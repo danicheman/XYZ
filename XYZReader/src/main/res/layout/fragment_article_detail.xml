@@ -10,6 +10,7 @@
         android:layout_height="match_parent">
 
         <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -18,11 +19,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/photo_placeholder">
-                <!--suppress AndroidLintContentDescription -->
+
                 <ImageView
                     android:id="@+id/photo"
+                    android:transitionName="@string/transition_photo"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="@dimen/detail_card_top_margin"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/photo_content_description"
                     />
 
                 <View
@@ -36,11 +40,11 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:maxWidth="@dimen/detail_card_max_width"
                 android:background="#fff"
                 android:elevation="2dp"
-                android:layout_marginTop="@dimen/detail_card_top_margin">
+                android:layout_marginTop="@dimen/detail_card_top_margin"
+                android:layout_gravity="center_horizontal">
 
                 <LinearLayout
                     android:id="@+id/meta_bar"

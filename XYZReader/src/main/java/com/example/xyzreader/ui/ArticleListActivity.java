@@ -9,7 +9,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
+
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -18,8 +18,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -52,7 +50,7 @@ public class ArticleListActivity extends AppCompatActivity implements
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
-        final View toolbarContainerView = findViewById(R.id.toolbar_container);
+        //final View toolbarContainerView = findViewById(R.id.toolbar_container);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
@@ -146,6 +144,9 @@ public class ArticleListActivity extends AppCompatActivity implements
                         Log.i(TAG, "onClick: Using SharedTransition");
                         DynamicHeightNetworkImageView imageView =
                                 (DynamicHeightNetworkImageView) view.findViewById(R.id.thumbnail);
+
+                        imageView.setTransitionName(getString(R.string.transition_photo));
+
                         Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
                                 ArticleListActivity.this,
                                 imageView,

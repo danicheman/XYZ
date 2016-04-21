@@ -10,12 +10,15 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
+import android.transition.AutoTransition;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +69,8 @@ public class ArticleDetailFragment extends Fragment implements
         Bundle arguments = new Bundle();
         arguments.putLong(ARG_ITEM_ID, itemId);
         ArticleDetailFragment fragment = new ArticleDetailFragment();
+
+        fragment.setSharedElementEnterTransition(new ArticleDetailTransition());
         fragment.setArguments(arguments);
         return fragment;
     }
@@ -206,8 +211,15 @@ public class ArticleDetailFragment extends Fragment implements
                                 Palette p = Palette.generate(bitmap, 12);
                                 mMutedColor = p.getDarkMutedColor(0xFF333333);
                                 mPhotoView.setImageBitmap(imageContainer.getBitmap());
+
+                                GradientDrawable gd = new GradientDrawable(
+                                        GradientDrawable.Orientation.BOTTOM_TOP,
+                                        new int[] {mMutedColor,0x00FFFFFF});
+                                gd.setCornerRadius(0f);
+
                                 mRootView.findViewById(R.id.meta_bar)
-                                        .setBackgroundColor(mMutedColor);
+                                        .setBackground(gd);
+
                                 updateStatusBar();
 
                             }

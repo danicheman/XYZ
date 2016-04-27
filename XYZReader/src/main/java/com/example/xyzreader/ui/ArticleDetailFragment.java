@@ -16,6 +16,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.graphics.Palette;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
@@ -117,17 +118,6 @@ public class ArticleDetailFragment extends Fragment implements
         });*/
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) mRootView.findViewById(R.id.detail_collapsing_toolbar);
 
-        mScrollView = (ObservableScrollView) mRootView.findViewById(R.id.scrollview);
-        mScrollView.setCallbacks(new ObservableScrollView.Callbacks() {
-            @Override
-            public void onScrollChanged() {
-                mScrollY = mScrollView.getScrollY();
-                getActivityCast().onUpButtonFloorChanged(mItemId, ArticleDetailFragment.this);
-                mPhotoContainerView.setTranslationY((int) (mScrollY - mScrollY / PARALLAX_FACTOR));
-                updateStatusBar();
-            }
-        });
-
         mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
         mPhotoContainerView = mRootView.findViewById(R.id.detail_collapsing_toolbar);
 
@@ -194,6 +184,9 @@ public class ArticleDetailFragment extends Fragment implements
             mRootView.animate().alpha(1);
             titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
             mCollapsingToolbarLayout.setTitle(mCursor.getString(ArticleLoader.Query.TITLE));
+
+            mCollapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
+
             bylineView.setText(Html.fromHtml(
                     DateUtils.getRelativeTimeSpanString(
                             mCursor.getLong(ArticleLoader.Query.PUBLISHED_DATE),
@@ -212,6 +205,9 @@ public class ArticleDetailFragment extends Fragment implements
                                 Palette p = Palette.generate(bitmap, 12);
                                 mMutedColor = p.getDarkMutedColor(0xFF333333);
                                 mPhotoView.setImageBitmap(imageContainer.getBitmap());
+
+                                mCollapsingToolbarLayout.setCollapsedTitleTextColor(p.getLightMutedColor(0xFFFFFFFF));
+                                mCollapsingToolbarLayout.setContentScrimColor(mMutedColor);
 
                                 GradientDrawable gd = new GradientDrawable(
                                         GradientDrawable.Orientation.BOTTOM_TOP,

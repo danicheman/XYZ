@@ -1,6 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@android:color/transparent"
     >
 
@@ -21,7 +22,6 @@
             android:id="@+id/action_up"
             android:layout_width="56dp"
             android:layout_height="?actionBarSize"
-            android:layout_marginLeft="@dimen/up_button_margin"
             android:background="?selectableItemBackgroundBorderless"
             android:contentDescription="@string/up"
             android:src="@drawable/ic_arrow_back" />

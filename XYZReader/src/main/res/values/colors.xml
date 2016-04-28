@@ -19,7 +19,7 @@
     <!-- Cyan Theme - Material Design Color Palette -->
 
     <color name="photo_placeholder">#ccc</color>
-
+    <color name="off_white">#8fff</color>
     <color name="color_primary">#00BCD4</color>
     <color name="color_primary_dark">#006064</color>
     <color name="color_accent">#00B8D4</color>

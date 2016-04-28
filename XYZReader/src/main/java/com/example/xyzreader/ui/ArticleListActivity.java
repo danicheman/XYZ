@@ -140,7 +140,7 @@ public class ArticleListActivity extends AppCompatActivity implements
 
                     Intent intent = new Intent(Intent.ACTION_VIEW,
                             ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition())));
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         Log.i(TAG, "onClick: Using SharedTransition");
                         DynamicHeightNetworkImageView imageView =
                                 (DynamicHeightNetworkImageView) view.findViewById(R.id.thumbnail);
@@ -153,10 +153,10 @@ public class ArticleListActivity extends AppCompatActivity implements
                                 imageView.getTransitionName())
                                 .toBundle();
                         startActivity(intent, bundle);
-                    } else {
+                    } else {*/
                         Log.i(TAG, "onClick: Not using shared transition");
                         startActivity(intent);
-                    }
+                    //}
 
                 }
             });
